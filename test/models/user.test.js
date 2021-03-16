@@ -74,13 +74,15 @@ describe("User model tests...", () => {
   });
 
   it("Deletes a user", async () => {
+    let data;
     let user;
     try {
-      await db.User.destroy({ where: { id: destroyUser.id } });
+      data = await db.User.destroy({ where: { id: destroyUser.id } });
       user = await db.User.findByPk(destroyUser.id);
     } catch (err) {
       console.error(err);
     }
+    expect(data).to.be.equal(1);
     expect(user).to.be.null;
   });
 });

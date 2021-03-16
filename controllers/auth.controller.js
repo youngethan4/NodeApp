@@ -10,6 +10,6 @@ exports.register = async (req, res) => {
     let user = await db.User.create(data);
     res.json(user);
   } catch (err) {
-    res.status(500).send(err);
+    res.sendStatus(500);
   }
 };
