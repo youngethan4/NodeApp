@@ -1,7 +1,7 @@
 const db = require("../models/index.js");
 
 exports.login = (req, res) => {
-  res.json({ username: req.user.username });
+  res.json({ username: req.user.username, id: req.user.id });
 };
 
 exports.register = async (req, res) => {
