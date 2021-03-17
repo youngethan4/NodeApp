@@ -15,7 +15,8 @@ exports.updateMake = async (req, res) => {
   const data = req.body;
   try {
     let make = await db.Make.update(data, { where: { id: id } });
-    res.json(make);
+    if (make[0] == 0) res.sendStatus(404);
+    else res.json(make);
   } catch (err) {
     res.sendStatus(500);
   }
@@ -25,7 +26,8 @@ exports.getMake = async (req, res) => {
   const id = req.params.id;
   try {
     let make = await db.Make.findByPk(id);
-    res.json(make);
+    if (make == null) res.sendStatus(404);
+    else res.json(make);
   } catch (err) {
     res.sendStatus(500);
   }
@@ -43,8 +45,9 @@ exports.getMakes = async (req, res) => {
 exports.deleteMake = async (req, res) => {
   const id = req.params.id;
   try {
-    await db.Make.destroy({ where: { id: id } });
-    res.sendStatus(204);
+    let make = await db.Make.destroy({ where: { id: id } });
+    if (make == 0) res.sendStatus(404);
+    else res.sendStatus(204);
   } catch (err) {
     res.sendStatus(500);
   }

@@ -15,7 +15,8 @@ exports.updateModel = async (req, res) => {
   const data = req.body;
   try {
     let model = await db.CarModel.update(data, { where: { id: id } });
-    res.json(model);
+    if (model[0] == 0) res.sendStatus(404);
+    else res.json(model);
   } catch (err) {
     res.sendStatus(500);
   }
@@ -25,7 +26,8 @@ exports.getModel = async (req, res) => {
   const id = req.params.id;
   try {
     let model = await db.CarModel.findByPk(id);
-    res.json(model);
+    if (model == null) res.sendStatus(404);
+    else res.json(model);
   } catch (err) {
     res.sendStatus(500);
   }
@@ -43,8 +45,9 @@ exports.getModels = async (req, res) => {
 exports.deleteModel = async (req, res) => {
   const id = req.params.id;
   try {
-    await db.CarModel.destroy({ where: { id: id } });
-    res.sendStatus(204);
+    let model = await db.CarModel.destroy({ where: { id: id } });
+    if (model == 0) res.sendStatus(404);
+    else res.sendStatus(204);
   } catch (err) {
     res.sendStatus(500);
   }
