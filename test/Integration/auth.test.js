@@ -6,6 +6,7 @@ let user = {
   username: "auth",
   email: "a@a.a",
   password: "aaaAAA",
+  role: 1,
 };
 
 describe("Auth controller tests...", () => {

@@ -4,6 +4,7 @@ let testUser = {
   username: "bobyjoe",
   email: "bobyj@gmail.com",
   password: "JollyJ03!",
+  role: 1,
 };
 let destroyUser = {
   email: "boby@gmail.com",
@@ -30,6 +31,7 @@ describe("User model tests...", () => {
         email: "b@b.b",
         username: "bb",
         password: "testest",
+        role: 1,
       });
       user = user.dataValues;
     } catch (err) {
